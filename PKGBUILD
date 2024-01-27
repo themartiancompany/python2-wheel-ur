@@ -2,7 +2,11 @@
 # Contributor: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Morten Linderud <foxboron@archlinux.org>
 # Contributor: Lance Chen <cyen0312@gmail.com>
-pkgname=python2-wheel
+# Contributor: Lance Chen <cyen0312@gmail.com>
+# Contributor: Lance Chen <cyen0312@gmail.com>
+
+_py="python2"
+pkgname="${_py}-wheel"
 _name=${pkgname#python2-}
 pkgver=0.37.1
 pkgrel=5
@@ -37,7 +41,12 @@ check() {
 
 package() {
   cd "$srcdir/$_name-$pkgver"
-  python2 setup.py install --root="$pkgdir/" --optimize=1 --skip-build
+  python2 \
+    setup.py \
+      install \
+        --root="${pkgdir}" \
+	--optimize=1 \
+	--skip-build
   install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt"
   mv "$pkgdir/usr/bin/wheel" "$pkgdir/usr/bin/wheel2"
 }
